@@ -1,12 +1,18 @@
 import { StyleSheet, View, Text, Image } from 'react-native';
 import Colors from '@/src/constants/Colors';
+import { Product } from '@/assets/types';
 
-const ProductListItem = ({ product }) => {
+type ProductListItemProps = {
+	product: Product;
+};
+
+const ProductListItem = ({ product }: ProductListItemProps) => {
 	return (
 		<View style={styles.container}>
 			<Image
 				source={{ uri: product.image }}
 				style={styles.image}
+				resizeMode='contain'
 			/>
 			<Text style={styles.title}>{product.name}</Text>
 			<Text style={styles.price}>{`$${product.price}`}</Text>
@@ -21,6 +27,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		padding: 12,
 		borderRadius: 20,
+		flex: 1,
+		maxWidth: '50%',
 	},
 	image: {
 		width: '100%',
