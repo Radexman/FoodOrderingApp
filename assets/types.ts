@@ -1,9 +1,11 @@
-export type Product = {
-	id: number;
-	image: string | undefined;
-	name: string;
-	price: number;
-};
+export type Product =
+	| {
+			id: number;
+			image: string | undefined;
+			name: string;
+			price: number;
+	  }
+	| undefined;
 
 export type PizzaSize = 'S' | 'M' | 'L' | 'XL';
 
