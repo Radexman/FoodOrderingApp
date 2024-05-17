@@ -61,4 +61,6 @@ const products = [
 	},
 ];
 
+export const defaultPizza = 'https://cdn-icons-png.flaticon.com/512/7640/7640294.png';
+
 export default products;

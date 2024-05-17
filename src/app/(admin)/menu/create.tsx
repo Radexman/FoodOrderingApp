@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
+import { defaultPizza } from '@/assets/data/products';
 import Button from '@/src/components/Button';
+import Colors from '@/src/constants/Colors';
+import * as ImagePicker from 'expo-image-picker';
+import { Stack } from 'expo-router';
 
 const CreateProductScreen = () => {
+	const [image, setImage] = useState<string | null>(null);
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState('');
 	const [errors, setErrors] = useState('');
@@ -13,6 +18,7 @@ const CreateProductScreen = () => {
 	};
 
 	const validateInput = () => {
+		setErrors('');
 		if (!name) {
 			setErrors('Name is requiered');
 			return;
@@ -40,8 +46,32 @@ const CreateProductScreen = () => {
 		resetFields();
 	};
 
+	const pickImage = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+		});
+
+		if (!result.canceled) {
+			setImage(result.assets[0].uri);
+		}
+	};
+
 	return (
 		<View style={styles.container}>
+			<Stack.Screen options={{ title: 'Create Product' }} />
+			<Image
+				source={{ uri: image || defaultPizza }}
+				style={styles.image}
+			/>
+			<Text
+				onPress={pickImage}
+				style={styles.textButton}
+			>
+				Select Image
+			</Text>
 			<Text style={styles.label}>Name</Text>
 			<TextInput
 				value={name}
@@ -85,6 +115,17 @@ const styles = StyleSheet.create({
 	},
 	errorText: {
 		color: 'red',
+	},
+	image: {
+		width: '50%',
+		aspectRatio: 1,
+		alignSelf: 'center',
+	},
+	textButton: {
+		alignSelf: 'center',
+		fontWeight: 'bold',
+		color: Colors.light.tint,
+		marginVertical: 10,
 	},
 });
 
