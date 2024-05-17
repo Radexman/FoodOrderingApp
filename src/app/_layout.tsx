@@ -58,6 +58,10 @@ function RootLayoutNav() {
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
+						name='(auth)'
+						options={{ title: 'Sign In', headerShown: false }}
+					/>
+					<Stack.Screen
 						name='(user)'
 						options={{ headerShown: false }}
 					/>
