@@ -20,7 +20,8 @@ const ProductDetailsScreen = () => {
 				resizeMode='contain'
 				style={styles.image}
 			/>
-			<Text style={styles.price}>{`Price: $${product.price.toFixed(2)}`}</Text>
+			<Text style={styles.productText}>Product: {product.name}</Text>
+			<Text style={styles.productText}>{`Price: $${product.price.toFixed(2)}`}</Text>
 		</View>
 	);
 };
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		aspectRatio: 1,
 	},
-	price: {
+	productText: {
 		fontSize: 20,
 		fontWeight: 'bold',
 	},
